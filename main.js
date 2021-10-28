@@ -5,6 +5,7 @@ const { Robot } = require('./robot.js')
 const MAX_COORDS = 50;
 const MAX_INSTRUCTION_LENGTH = 100;
 
+
 function Main(){
     // Get the input
     let args = process.argv.slice(2);
@@ -23,7 +24,7 @@ function Main(){
     let [sizex, sizey] = data[0].split(" ");
 
     // Init the map
-    let mars = new Mars(Number(sizex), Number(sizey));
+    let mars = new Mars(Number(sizex) + 1, Number(sizey) + 1);
     
     // Get robots state + instructions and place them on the map
     data = data.slice(1);
@@ -35,17 +36,28 @@ function Main(){
         mars.grid[posx][posy] = robot;
     }
     
-
     for (let i = 0; i < robots.length; i++){
         let robot = robots[i];
-        if (robot.isAlive){
-            for (let j=0; i < robot.instructions; i++){
-                let instruction = robot.instructions[i]
+        for (let j=0; j < robot.instructions.length; j++){
+            let instruction = robot.instructions[j]
+            if (robot.isAlive){
                 if (instruction === "F"){
+                    // If theres a scent robot moves on, however if he gets out of mars
+                    // he gets to his old position.
+                    if (mars.theresScent(robot.posx, robot.posy)){
+                        robot.moveForward(mars.grid);
+                        if (!mars.isInside(robot)){
+                            robot.moveForward(mars.grid, backwards=true);
+                            continue;
+                        }
+                        continue;
+                    }
                     robot.moveForward(mars.grid);
+
                     if (!mars.isInside(robot)){
                         robot.isAlive = false;
                         robot.moveForward(mars.grid, backwards=true)
+                        robot.leaveScent(mars);
                     }
                 }else{
                     robot.rotate(instruction);
@@ -54,9 +66,8 @@ function Main(){
         }
     }
     for (let i = 0; i < robots.length; i++){
-        console.log(robots[i])
-    }
-    
+        console.log(robots[i]);
+    } 
 }
 
 

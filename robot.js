@@ -15,22 +15,22 @@ class Robot{
         switch (this.orientation){
             case "N":
                 map[this.posx][this.posy] = null;
-                this.posy += 1;
+                this.posy += direction;
                 map[this.posx][this.posy] = this;  
                 break;
             case "S":
                 map[this.posx][this.posy] = null;
-                this.posy -= 1;
+                this.posy -= direction;
                 map[this.posx][this.posy] = this;
                 break;
             case "E":
                 map[this.posx][this.posy] = null;
-                this.posx += 1;
+                this.posx += direction;
                 map[this.posx][this.posy] = this;
                 break;
             case "W":
                 map[this.posx][this.posy] = null;
-                this.posx -= 1;
+                this.posx -= direction;
                 map[this.posx][this.posy] = this;
                 break; 
         }
@@ -70,6 +70,10 @@ class Robot{
                     break;
         }
 
+    }
+    leaveScent(map){
+        let coords = [this.posx, this.posy]
+        map.scents.push(coords);
     }
 }
 
