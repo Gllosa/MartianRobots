@@ -4,6 +4,7 @@ const { Robot } = require('./robot.js')
 
 const MAX_COORDS = 50;
 const MAX_INSTRUCTION_LENGTH = 100;
+const DIRECTORY_PATH = __dirname + "\\"
 
 
 function Main(){
@@ -13,7 +14,7 @@ function Main(){
     let file = require('fs');
     let data = ""
     try{
-        data = file.readFileSync(fileName, 'utf-8');
+        data = file.readFileSync(DIRECTORY_PATH + fileName, 'utf-8');
     }catch (err){
         console.error(err);
     }
@@ -23,14 +24,27 @@ function Main(){
     data = data.split("\n");
     let [sizex, sizey] = data[0].split(" ");
 
+    // Check for valid input on map size
+    if ((Number(sizex) > MAX_COORDS || Number(sizex) < 0) || 
+        (Number(sizey) > MAX_COORDS || Number(sizey) < 0)){
+            console.error("Map size invalid. Size should be in [0, 50] range")
+            return
+        }
+    
+
     // Init the map
     let mars = new Mars(Number(sizex) + 1, Number(sizey) + 1);
     
     // Get robots state + instructions and place them on the map
-    data = data.slice(1);
     let robots = []
-    for (let i=0; i < data.length; i+=2){
+    for (let i=1; i < data.length; i+=2){
         let [posx, posy, orientation] = data[i].split(" ");
+        // Check for correct instruction length
+        if (data[i+1].length > MAX_INSTRUCTION_LENGTH){
+            let error_message = "Instruction length invalid. Instruction lenght should be less than " + MAX_INSTRUCTION_LENGTH.toString();
+            console.error(error_message);
+            return;
+        }
         let robot = new Robot(Number(posx), Number(posy), orientation, data[i + 1]);
         robots.push(robot)
         mars.grid[posx][posy] = robot;
@@ -76,7 +90,7 @@ function Main(){
     // Write the output
     let fs = require('fs');
     try{
-        let data = fs.writeFileSync('output.txt', output)
+        let data = fs.writeFileSync(DIRECTORY_PATH + 'output.txt', output)
     }catch (err){
         console.error(err);
     }
