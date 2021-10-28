@@ -8,6 +8,7 @@ const DIRECTORY_PATH = __dirname + "\\"
 
 
 function Main(){
+
     // Get the input
     let args = process.argv.slice(2);
     let fileName = args[0];
@@ -57,7 +58,7 @@ function Main(){
             if (robot.isAlive){
                 if (instruction === "F"){
                     // If theres a scent robot moves on, however if he gets out of mars
-                    // he gets to his old position.
+                    // he goes back to his old position and continues with next instruction.
                     if (mars.theresScent(robot.posx, robot.posy)){
                         robot.moveForward(mars.grid);
                         if (!mars.isInside(robot)){
@@ -79,18 +80,21 @@ function Main(){
             }
         }
     }
+
+    // Generate the oputput
     let output = "";
     for (let i = 0; i < robots.length; i++){
         let robot = robots[i];
-        let resume = String(robot.posx) + " " + String(robot.posy) + " " + robot.orientation 
-                    + (robot.isAlive ? "": " LOST") + "\n";
+        let resume = String(robot.posx) + " " + String(robot.posy) + " " + 
+                     robot.orientation + (robot.isAlive ? "" : " LOST") + "\n";
         output += resume;
     }
     console.log(output);
-    // Write the output
+    
+    // Write the output in a file
     let fs = require('fs');
     try{
-        let data = fs.writeFileSync(DIRECTORY_PATH + 'output.txt', output)
+        fs.writeFileSync(DIRECTORY_PATH + 'output.txt', output)
     }catch (err){
         console.error(err);
     }
