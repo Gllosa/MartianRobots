@@ -65,9 +65,21 @@ function Main(){
             }
         }
     }
+    let output = "";
     for (let i = 0; i < robots.length; i++){
-        console.log(robots[i]);
-    } 
+        let robot = robots[i];
+        let resume = String(robot.posx) + " " + String(robot.posy) + " " + robot.orientation 
+                    + (robot.isAlive ? "": " LOST") + "\n";
+        output += resume;
+    }
+    console.log(output);
+    // Write the output
+    let fs = require('fs');
+    try{
+        let data = fs.writeFileSync('output.txt', output)
+    }catch (err){
+        console.error(err);
+    }
 }
 
 
