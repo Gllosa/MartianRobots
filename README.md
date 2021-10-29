@@ -2,7 +2,7 @@
 
 ## **Description**
 
-Martian Robots simulates the movement of certain robots given a size map, initial positions, orientation and a set of instructions for each robot.<br>Instructions include: 
+Martian Robots simulates the movement of certain robots given a size of a map, initial positions, orientation and a set of instructions for each robot.<br>Instructions include: 
 - "L" (wich means a left 90 degree rotation) 
 - "R" (wich means a right 90 degree rotation)
 - "F" (wich means to move one step forward in the actual orientation).
