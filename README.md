@@ -25,7 +25,7 @@ LLFFFLFLFL
 
 
 ## **Run it**
-In order to run the program you will need to download the code. You also need to have an input.txt (in the same directory) just like the one in the sample. Once you have your input file ready you can run it from the file location as: node main.js "file name.txt".<br>
+In order to run the program you will need to download the code. You also need to have an input.txt (in the same directory) just like the one in the sample, wich is already given (you may change it). Once you have your input file ready you can run it from the file location as: ´node main.js "file name.txt"´.<br>
 Once you have run the code you will see the output on the console. Additionally an output.txt file will be created on the same directory.
 
 ## **Requirements**
