@@ -16,10 +16,11 @@ class Mars{
                 && this.sizey -1 >= robot.posy && robot.posy >= 0)
     }
 
-    theresScent(posx, posy){
+    theresScent(posx, posy, orientation){
         for (let i = 0; i<this.scents.length; i++){
             if (this.scents[i][0] === posx && 
-                this.scents[i][1] === posy){
+                this.scents[i][1] === posy &&
+                this.scents[i][2] === orientation){
                 return true
             }
         }

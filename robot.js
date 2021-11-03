@@ -72,7 +72,7 @@ class Robot{
 
     }
     leaveScent(map){
-        let coords = [this.posx, this.posy]
+        let coords = [this.posx, this.posy, this.orientation]
         map.scents.push(coords);
     }
 }

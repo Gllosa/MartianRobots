@@ -28,7 +28,7 @@ function Main(){
     // Check for valid input on map size
     if ((Number(sizex) > MAX_COORDS || Number(sizex) < 0) || 
         (Number(sizey) > MAX_COORDS || Number(sizey) < 0)){
-            console.error("Map size invalid. Size should be in [0, 50] range")
+            console.error("Map size invalid. Size should be in [0, " + MAX_COORDS.toString()+"] range")
             return
         }
     
@@ -59,11 +59,10 @@ function Main(){
                 if (instruction === "F"){
                     // If theres a scent robot moves on, however if he gets out of mars
                     // he goes back to his old position and continues with next instruction.
-                    if (mars.theresScent(robot.posx, robot.posy)){
+                    if (mars.theresScent(robot.posx, robot.posy, robot.orientation)){
                         robot.moveForward(mars.grid);
                         if (!mars.isInside(robot)){
                             robot.moveForward(mars.grid, backwards=true);
-                            continue;
                         }
                         continue;
                     }
