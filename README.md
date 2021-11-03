@@ -8,7 +8,7 @@ Martian Robots simulates the movement of certain robots given a size of a map, i
 - "F" (wich means to move one step forward in the actual orientation).
 
 Robots can be oriented: "**N**" (north), "**S**" (south), "**E**" (east) and "**W**" (west). So, for explample, if a robot is oriented "**N**" and recibes an "**L**" instruction he will rotate into "**W**" orientation, consequently when he recibes "**R**" he will rotate "**E**".<br>
-If a robot gets outs of the map bounds he will be lost forever leaving a scent at the last map point before getting lost. When another robot gets to that point scent will prevent him from obeying the order. I' ve considered that this scent only prevents a robot from being lost in the same direction as the one who was already lost. So, for explample, let's suppose we have a robot that gets lost on the top right corner of the grid in north direction, this would only prevent another robot of being lost in north direction, however he could get lost in east direction.<br>
+If a robot gets outs of the map bounds he will be lost forever leaving a scent at the last map point before getting lost. When another robot gets to that point scent will prevent him from obeying the order. I' ve considered that this scent only prevents a robot from being lost in the same direction as the one who was already lost. So, for explample, let's suppose we have a robot that gets lost on the top right corner of the grid in north direction, this would only prevent another robot of being lost in north direction, however he would get lost in east direction.<br>
 The map size can´t be greater than 50. Instructions set can`t be greater than 100.<br>
 ### Sample input
 5 3 <br>
